@@ -1,0 +1,20 @@
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  r2dbc:
+    url: r2dbc:mysql://localhost:20306?useUnicode=true&serverTimezone=Asia/Seoul
+    username: test
+    password: test
+    name: test
+database:
+  dialect: mysql
+
+logging:
+  pattern:
+    level: org.springframework.r2dbc=DEBUG
+#  level:
+#    io.r2dbc.proxy: DEBUG
+#    io.r2dbc.proxy.core: DEBUG
+#    org.springframework.data.r2dbc.core: DEBUG
+

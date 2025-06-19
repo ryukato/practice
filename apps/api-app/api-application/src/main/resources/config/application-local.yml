@@ -1,0 +1,22 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mysql
+    import:
+      - application-spring-r2dbc-storage-mysql.yml
+      - application-spring-r2dbc-storage-mysql-local.yml
+#      - application-spring-redis-single.yml
+---
+spring:
+  config:
+    activate:
+      on-profile: h2
+    import:
+      - application-spring-r2dbc-storage-h2-local.yml
+#      - application-spring-redis-single.yml

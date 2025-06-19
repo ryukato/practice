@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:20070}
+
+spring:
+  codec:
+    max-in-memory-size: 5MB  # 원하는 크기로 조정
+
+logging:
+  config: classpath:logback/logback-spring.xml
+
+# actuator config
+management:
+  server:
+    port: ${ACTUATOR_PORT:20071}
+  endpoint:
+    health:
+      probes:
+        addAdditionalPaths: true
+        enabled: true
+    metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus,metrics
+    health:
+      show-details: always
+

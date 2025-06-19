@@ -1,0 +1,117 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8
+    restart: always
+    container_name: mysql8
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - TZ=Asia/Seoul
+    ports:
+      - 20306:3306
+    volumes:
+      - ./mysql/data/:/var/lib/mysql
+    networks:
+      - sample-app
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+#      - --skip-character-set-client-handshake
+  redis-node-0:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-0
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-0
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    ports:
+      - "26379:6379"
+      - "17000:16379"
+    networks:
+       - sample-app
+
+  redis-node-1:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-1
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-1
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    networks:
+       - sample-app
+
+  redis-node-2:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-2
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-2
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    networks:
+       - sample-app
+
+  redis-node-3:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-3
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-3
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    networks:
+       - sample-app
+
+  redis-node-4:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-4
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-4
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    networks:
+       - sample-app
+
+  redis-node-5:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-node-5
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+      - REDIS_CLUSTER_ANNOUNCE_IP=redis-node-5
+      - REDIS_CLUSTER_DYNAMIC_IPS=yes
+    networks:
+       - sample-app
+
+  redis-cluster-init:
+    image: bitnami/redis-cluster:7.2
+    container_name: redis-cluster-init
+    environment:
+      - REDIS_PASSWORD=secret
+      - REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5
+    depends_on:
+      - redis-node-0
+      - redis-node-1
+      - redis-node-2
+      - redis-node-3
+      - redis-node-4
+      - redis-node-5
+    command: >
+      /opt/bitnami/scripts/redis-cluster/setup.sh
+      --cluster-announce-ip redis-cluster-init
+      --password secret
+      --cluster-replicas 1
+      --use-password
+    networks:
+       - sample-app
+
+networks:
+  sample-app:
+    driver: bridge
