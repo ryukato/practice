@@ -19,6 +19,7 @@ jasypt = "3.0.5"
 reactor = "3.3.6.RELEASE"
 reactorKotlin = "1.0.2.RELEASE"
 r2dbc = "1.4.1"
+redisson = "3.25.2"
 testContainerVersion = "1.17.2"
 
 [libraries]
@@ -53,10 +54,17 @@ springBootStarterTest = { module = "org.springframework.boot:spring-boot-starter
 springDocs = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "springDocs" }
 springBootStartActuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 springBootStarterR2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
+springBootStarterDataRedisReactive = {module = "org.springframework.boot:spring-boot-starter-data-redis-reactive"}
+
 
 #r2dbc
 r2dbcMysql = {module = "io.asyncer:r2dbc-mysql", version.ref="r2dbc"}
 jasypt = { module = "com.github.ulisesbocchio:jasypt-spring-boot-starter", version.ref = "jasypt" }
+
+# redis
+redisson = {module = "org.redisson:redisson", version.ref = "redisson"}
+
+commonsPool = {module =  "org.apache.commons:commons-pool2" }
 
 # test-containers
 testContainerMysql = {module ="org.testcontainers:mysql", version.ref="testContainerVersion"}

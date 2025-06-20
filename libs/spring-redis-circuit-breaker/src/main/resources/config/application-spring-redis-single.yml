@@ -1,0 +1,15 @@
+spring:
+  config:
+    import:
+      - application-spring-redis.yml
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 26379
+      password: secret
+      lettuce:
+        pool:
+          enabled: true
+          max-active: 10
+          max-idle: 5
+          min-idle: 1

@@ -1,0 +1,7 @@
+redis:
+  lettuce:
+    pool:
+      enabled: true
+      max-active: 10
+      max-idle: 5
+      min-idle: 1

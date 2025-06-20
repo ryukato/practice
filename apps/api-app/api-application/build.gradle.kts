@@ -12,9 +12,11 @@ plugins {
 dependencies {
     implementation(project(":core-domain"))
     implementation(project(":core-domain-api"))
+    implementation(project(":core-domain-utility"))
     implementation(project(":rest-api-model"))
     implementation(project(":utils"))
     implementation(project(":spring-r2dbc-storage-mysql"))
+    api(project(":spring-redis-circuit-breaker")) // using api to get project(":spring-storage-redis")
 
     implementation(libs.bundles.kotlinxEcosystem)
     implementation(libs.bundles.jackson)

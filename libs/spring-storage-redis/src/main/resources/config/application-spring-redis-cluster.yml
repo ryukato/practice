@@ -1,0 +1,22 @@
+spring:
+  config:
+    import:
+      - application-spring-redis.yml
+  data:
+    redis:
+      password: secret
+      cluster:
+        # TODO update nodes
+        nodes:
+          - "192.168.0.243:26379"
+          - "192.168.0.243:26380"
+          - "192.168.0.243:26381"
+          - "192.168.0.243:26382"
+          - "192.168.0.243:26383"
+          - "192.168.0.243:26384"
+        max-redirects: 5
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s

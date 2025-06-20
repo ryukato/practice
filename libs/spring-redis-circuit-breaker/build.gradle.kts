@@ -10,15 +10,17 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":core-domain"))
+    implementation(project(":core-domain-utility"))
     implementation(project(":date-util"))
+    implementation(project(":spring-storage-redis"))
     // Apply the kotlinx bundle of dependencies from the version catalog (`gradle/libs.versions.toml`).
     implementation(libs.bundles.kotlinxEcosystem)
-    implementation(libs.bundles.jackson)
     implementation(libs.bundles.kotlinxCoroutinesReactor)
     implementation(libs.reactorTest)
-    implementation(libs.r2dbcMysql)
-    implementation(libs.springBootStarterR2dbc)
+    implementation(libs.springBootStarterDataRedisReactive)
+    implementation(libs.redisson)
+    implementation(libs.commonsPool)
+
     implementation(libs.bundles.springBootWebFluxDependencies)
     implementation(libs.jasypt)
 
@@ -31,5 +33,5 @@ dependencies {
 val jar: Jar by tasks
 val bootJar: org.springframework.boot.gradle.tasks.bundling.BootJar by tasks
 jar.enabled = true
-jar.archiveBaseName.set("spring-r2dbc-storage-mysql")
+jar.archiveBaseName.set("spring-redis-circuit-breaker")
 bootJar.enabled = false

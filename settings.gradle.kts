@@ -31,11 +31,14 @@ listOf(
 listOf(
     "core-domain",
     "core-domain-api",
+    "core-domain-utility",
     "utils",
     "date-util",
     "retrofit2-api-client",
     "spring-webclient-factory",
-    "spring-r2dbc-storage-mysql"
+    "spring-r2dbc-storage-mysql",
+    "spring-storage-redis",
+    "spring-redis-circuit-breaker"
 ).forEach {
     include(it)
     project(":$it").projectDir = File("$rootDir/libs/$it")
