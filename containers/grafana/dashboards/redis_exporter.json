@@ -1,0 +1,18 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": {
+    "list": []
+  },
+  "panels": [],
+  "schemaVersion": 16,
+  "tags": [
+    "redis"
+  ],
+  "templating": {
+    "list": []
+  },
+  "title": "Redis Exporter (Sample)",
+  "uid": "redis-exporter",
+  "version": 1
+}
