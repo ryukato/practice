@@ -3,6 +3,9 @@ spring:
     activate:
       on-profile: local
 
+test:
+  message: test-api
+
 ---
 spring:
   config:

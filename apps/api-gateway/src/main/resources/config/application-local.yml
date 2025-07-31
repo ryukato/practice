@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+sample:
+  apps:
+    host:
+      api-app1: http://localhost:20070
+      api-app2: http://localhost:20075

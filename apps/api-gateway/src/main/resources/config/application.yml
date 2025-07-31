@@ -1,0 +1,31 @@
+server:
+  port: ${PORT:20060}
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  profiles:
+    active: local
+  config:
+    import: default-routes.yml
+
+# actuator config
+management:
+  server:
+    port: ${ACTUATOR_PORT:20061}
+  endpoint:
+    health:
+      probes:
+        addAdditionalPaths: true
+        enabled: true
+    metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus,metrics
+    health:
+      show-details: always
+logging:
+  config: classpath:logback/logback-spring.xml

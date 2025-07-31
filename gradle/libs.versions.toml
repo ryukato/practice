@@ -7,12 +7,14 @@ kotlin = "2.1.20"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJSON = "1.7.3"
 kotlinxCoroutines = "1.9.0"
+kotlinLogging = "3.0.5"
 junit = "5.10.1"
 jackson = "2.17.2" #  this is the version for spring-boot:3.3.3
 retrofit2 = "2.11.0"
 okHttp = "4.12.0"
 sandwichRetrofit = "2.0.8"
 springBoot = "3.3.3"
+springCloudTrainVersion = "2023.0.1"
 osdetectorPlugin = "1.7.1"
 springDocs = "2.3.0"
 jasypt = "3.0.5"
@@ -27,10 +29,12 @@ kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ver
 kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinxSerialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJSON" }
 kotlinxCoroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinReflect = {module = "org.jetbrains.kotlin:kotlin-reflect"}
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 kotlinxCoroutinesReactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinxCoroutines" }
 reactorKotlinExtensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions", version.ref = "reactorKotlin" }
 reactorTest = { module = "io.projectreactor:reactor-test", version.ref = "reactor" }
+kotlinLogging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlinLogging" }
 
 jacksonDatabind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jacksonModuleKotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
@@ -54,22 +58,25 @@ springBootStarterTest = { module = "org.springframework.boot:spring-boot-starter
 springDocs = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "springDocs" }
 springBootStartActuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 springBootStarterR2dbc = { module = "org.springframework.boot:spring-boot-starter-data-r2dbc" }
-springBootStarterDataRedisReactive = {module = "org.springframework.boot:spring-boot-starter-data-redis-reactive"}
+springBootStarterDataRedisReactive = { module = "org.springframework.boot:spring-boot-starter-data-redis-reactive" }
+springCloudApiGateway = { module = "org.springframework.cloud:spring-cloud-starter-gateway" }
+springCloudLoadBalancer = { module = "org.springframework.cloud:spring-cloud-starter-loadbalancer" }
+springCloudDependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloudTrainVersion" }
 
 
 #r2dbc
-r2dbcMysql = {module = "io.asyncer:r2dbc-mysql", version.ref="r2dbc"}
+r2dbcMysql = { module = "io.asyncer:r2dbc-mysql", version.ref = "r2dbc" }
 jasypt = { module = "com.github.ulisesbocchio:jasypt-spring-boot-starter", version.ref = "jasypt" }
 
 # redis
-redisson = {module = "org.redisson:redisson", version.ref = "redisson"}
+redisson = { module = "org.redisson:redisson", version.ref = "redisson" }
 
-commonsPool = {module =  "org.apache.commons:commons-pool2" }
+commonsPool = { module = "org.apache.commons:commons-pool2" }
 
 # test-containers
-testContainerMysql = {module ="org.testcontainers:mysql", version.ref="testContainerVersion"}
-testContainer = {module =  "org.testcontainers:testcontainers", version.ref="testContainerVersion"}
-testContainerJunitJupiter = {module = "org.testcontainers:junit-jupiter", version.ref="testContainerVersion"}
+testContainerMysql = { module = "org.testcontainers:mysql", version.ref = "testContainerVersion" }
+testContainer = { module = "org.testcontainers:testcontainers", version.ref = "testContainerVersion" }
+testContainerJunitJupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testContainerVersion" }
 
 # Libraries can be bundled together for easier import
 [bundles]
@@ -97,12 +104,17 @@ springBootWebFluxDependencies = [
     "springDocs"
 ]
 
+springApiGateway = [
+    "springCloudApiGateway",
+    "springCloudLoadBalancer"
+]
+
 okHttpMockWebServer = [
     "okHttp",
     "okHttpMockWebServer"
 ]
 testContainerMysql = [
-   "testContainer",
+    "testContainer",
     "testContainerJunitJupiter",
     "testContainerMysql"
 ]

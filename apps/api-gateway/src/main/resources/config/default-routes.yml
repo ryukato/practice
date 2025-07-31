@@ -1,0 +1,35 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api-app1
+          uri: ${sample.apps.host.api-app1}
+          predicates:
+            - Path=/api/**
+            - name: RouteNewApiAppPredicateFactory
+              args:
+                header: user-id
+                rolloutPercentage: 20
+
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - name: RequestLoggingFilterFactory
+#              args:
+#                do-logging: true
+        - id: api-app2
+          uri: ${sample.apps.host.api-app2}
+          predicates:
+            - Path=/api/**
+            - name: RouteNewApiAppPredicateFactory
+              args:
+                header: user-id
+                rolloutPercentage: 100
+#          filters:
+#            - name: RequestLoggingFilterFactory
+#              args:
+#                do-logging: true
+        - id: sample-api-swagger-ui
+          uri: ${sample.apps.host.api-app1}
+          predicates:
+            - Path=/swagger-ui.html
